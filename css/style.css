@@ -1,0 +1,64 @@
+/*Global*/
+/*@font-face {
+    font-family: mavenpro;
+    src: url(https://fonts.googleapis.com/css?family=Maven+Pro);
+    font-weight: inherit;
+}*/
+@import url('https://fonts.googleapis.com/css?family=Maven+Pro');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+#title {
+    margin-left: 25%;
+}
+h3, p {
+    margin-left: 25px;
+}
+
+.screenshot {
+    width: 100%;
+}
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#map {
+    position: fixed;
+    width: 50%;
+}
+
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: Maven Pro;
+    overflow-y: scroll;
+    background-color: #221f10;
+    padding-bottom: 300px;
+}
+
+section {
+    line-height: 25px;
+    border-bottom: 1px solid #fbea14;
+    font-size: 15px;
+    background-color: #221f10;
+    color: antiquewhite;
+}
+
+section.active {
+    opacity: 1;
+    background-color: #570b18;
+    color: antiquewhite;
+}
+
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 600px;
+}

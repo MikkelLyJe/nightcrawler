@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Nightcrawler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div id='map'></div>
+
+<div id='features'>
+   <img src="images/title.png" alt="Titellogo" id="title">
+    <section id='1' class='active'>
+        <h3>Lous Lejlighed</h3>
+        <p>Louis Bloom følger nyhederne morgenen efter at have overværet et voldsomt biluheld</p><img src="images/1.png" alt="Lou sidder i sin lejlighed og ser nyhederne" class="screenshot">
+    </section>
+    <section id='2'>
+        <h3>Første Crash</h3>
+        <p>Ved førnævnte biluheld mødte Lou en freelance kameramand der fortæller ham om jobbet og princippet i "If it bleeds, it leads"</p><img src="images/2.png" alt="Første crash Lou ser" class="screenshot">
+    </section>
+    <section id='3'>
+        <h3>Politiscanner</h3>
+        <p>Efter at have arbejdet for sig selv i et stykke tid for Lou sig en ubetalt praktikant, Rick. Her er Ricks første arbejdsdag</p><img src="images/3.png" alt="Lou og Rick lytter til politiscanneren" class="screenshot">
+    </section>
+    <section id='4'>
+        <h3>Opsat drama</h3>
+        <p>Lou har fandt et aktivt indbrud i et dyrt kvarter hvor han så ansigterne på nogle af de voldelige gerningsmænd. Efter at genkende dem i en restaurant giver han politiet et anonymt tip og venter på konfrontationen.</p><img src="images/4.png" alt="Lou og Rick venter på konfrontation" class="screenshot">
+        
+    </section>
+    <section id='5'>
+        <h3>Biljagts slutning</h3>
+        <p>Førnævnte konfrontation ender i en skudepisode og en biljagt, som Lou og Rick følger på meget nært hold.</p><img src="images/5.png" alt="Konklusionen på biljagten" class="screenshot">
+    </section>
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWlra2VsbHlzZW1vc2UiLCJhIjoiY2pmamQzNWI0NWExbjMycG52cmtva2owcyJ9.p8eO8n1oOmj7sHdC5OIgDQ';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mikkellysemose/cjfjmujkc83m02ro4qw4mog0o',
+    center: [-118.24600,34.06908],
+    zoom: 18,
+});
+
+// object with places and geographic positions
+var chapters = {
+    '1': {
+    center: [-118.24600,34.06908],
+        zoom: 17
+    },
+    '2': {
+        duration: 7000,
+        center: [-118.38710,33.93108],
+        zoom: 17
+    },
+    '3': {
+        center: [-118.25249, 34.06700],
+        zoom: 17
+    },
+    '4': {
+        center: [-118.30910,33.90157],
+        zoom: 17
+    },
+    '5': {
+        center: [-118.39596,34.18492],
+        zoom: 17
+    }
+};
+
+    
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = '1';
+    
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+
+    map.flyTo(chapters[chapterName]);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+   
+</script>
+
+</body>
+</html>
